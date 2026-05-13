@@ -22,6 +22,14 @@
 
 ---
 
+## 🎥 Live Demonstration
+
+Watch the Solar Shield in action. The video below demonstrates real-time MQTT attack injections (FDI, Volatility) and the immediate response of the LSTM Autoencoder triggering the SOC dashboard from **SYSTEM NORMAL** to **THREAT DETECTED**.
+
+https://github.com/user-attachments/assets/e5c0492c-c9f8-4e50-8ca1-4f84070c6a7d
+
+---
+
 ## 🌟 Key Features
 
 * **🧠 AI-Driven Detection:** Utilizes a custom Long Short-Term Memory (LSTM) Autoencoder to identify complex, nonlinear deviations in telemetry data.
