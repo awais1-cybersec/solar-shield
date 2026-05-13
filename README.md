@@ -1,6 +1,23 @@
-# ☀️ Solar-Shield-IoT-Security
-**AI-Powered Real-Time Anomaly Detection for IoT-Based Smart Solar Infrastructure**
+<div align="center">
+ 
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=0f172a&height=250&section=header&text=☀️%20SOLAR%20SHIELD&fontSize=60&fontColor=00F2FE&animation=fadeIn&desc=AI-Powered%20Real-Time%20Anomaly%20Detection&descSize=20&descColor=9ca3af&descAlign=50&descAlignY=65" alt="Solar Shield Header">
+  
+  <img src="https://readme-typing-svg.herokuapp.com?font=Courier+New&weight=600&size=18&pause=1000&color=00F2FE&center=true&vCenter=true&width=800&lines=Initializing+Master+Solar+Cycle...;LSTM+Autoencoder+Active...;Monitoring+ESP32-S3+Telemetry...;Defending+against+False+Data+Injection" alt="Typing Effect">
+  <br><br>
 
+  <!-- Tech Stack Badges -->
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white" alt="Python"></a>
+  <a href="https://www.tensorflow.org/"><img src="https://img.shields.io/badge/TensorFlow-Keras-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white" alt="TensorFlow"></a>
+  <a href="https://espressif.com/"><img src="https://img.shields.io/badge/Edge-ESP32--S3-E7352C?style=for-the-badge&logo=espressif&logoColor=white" alt="ESP32"></a>
+  <a href="https://mosquitto.org/"><img src="https://img.shields.io/badge/MQTT-3C528?style=for-the-badge&logo=eclipse&logoColor=white" alt="MQTT"></a>
+  <a href="https://grafana.com/"><img src="https://img.shields.io/badge/Grafana-Cloud-F46800?style=for-the-badge&logo=grafana&logoColor=white" alt="Grafana"></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge" alt="MIT License"></a>
+
+  <br><br>
+  
+</div>
+
+---
 > *Defending cyber-physical systems through predictive multivariate analysis and edge intelligence.*
 
 ---
