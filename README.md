@@ -33,11 +33,11 @@
 
 ## 🏗️ High-Level System Architecture
 
-*(Placeholder for Architecture Diagram)*
+
 <img width="996" height="660" alt="image" src="https://github.com/user-attachments/assets/d21613da-a44f-4a79-b9dc-f6893fbd0756" />
 
 
-The architecture is divided into four distinct layers, ensuring physical segmentation and secure telemetry transport from the edge to the SOC dashboard.
+The architecture is divided into three distinct layers, ensuring physical segmentation and secure telemetry transport from the edge to the SOC dashboard.
 
 ---
 
