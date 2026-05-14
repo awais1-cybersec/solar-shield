@@ -102,7 +102,7 @@ Clone the repository and initialize the AI detection environment.
 
 ```bash
 git clone https://github.com/awais1-cybersec/solar-shield.git
-cd solar-shield/ai-engine
+cd solar-shield/Ai-engine
 python3 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
