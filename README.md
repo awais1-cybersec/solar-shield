@@ -112,7 +112,7 @@ python3 run_inference.py --model models/solar_shield.keras
 
 ### Step 4: Edge Layer (ESP32-S3)
 
-Open the `edge_device/` directory using PlatformIO or the Arduino IDE. Update the `simulation.ino` file with your MQTT Broker IP and flash the firmware to the ESP32-S3.
+Open the `Firmware` directory using PlatformIO or the Arduino IDE. Update the `simulation.ino` file with your MQTT Broker IP and flash the firmware to the ESP32-S3.
 
 ---
 
