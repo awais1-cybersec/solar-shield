@@ -93,7 +93,7 @@ sudo systemctl start mosquitto
 ### Step 2: Data Stack (InfluxDB & Grafana)
 
 1. Install and start InfluxDB to capture time-series telemetry.
-2. Install Grafana and import the `dashboards/SOC_Solar_Shield.json` template.
+2. Install Grafana and import the `Dashboards/solar-shield.json` template.
 3. Connect Grafana to your InfluxDB instance via the Data Sources menu.
 
 ### Step 3: AI Engine (R-TADS)
