@@ -26,14 +26,9 @@
 
 Watch the Solar Shield in action. The video below demonstrates real-time MQTT attack injections (FDI, Volatility) and the immediate response of the LSTM Autoencoder triggering the SOC dashboard from **SYSTEM NORMAL** to **THREAT DETECTED**.
 
-<div align="center">
 
-  <video width="90%" controls>
-    <source src="github.com/awais1-cybersec/solar-shield/blob/4c8ee79fdae3ac5a27de7f2ac32b2d2be914731d/Assets/Demo.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
+https://github.com/user-attachments/assets/6089ff91-e120-44c3-a2e7-2c39290a06ef
 
-</div>
 ---
 
 ## 🌟 Key Features
