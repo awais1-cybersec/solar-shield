@@ -1,0 +1,11 @@
+.venv/
+venv/
+__pycache__/
+.env
+.env.*
+!.env.example
+Firmware/secrets.h
+*.pkl
+*.joblib
+local-telemetry.jsonl
+local-evaluation.json

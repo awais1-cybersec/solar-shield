@@ -1,21 +1,22 @@
 #include <WiFi.h>
+#include "secrets.h"
 #include <PubSubClient.h>
 #include <ArduinoJson.h> // Ensure you are using ArduinoJson v7+
 
 // ==========================================
 // CONFIGURATION
 // ==========================================
-const char* ssid = "XXXXXXXX";
-const char* password = "XXXXXXXX";
+const char* ssid = WIFI_SSID;
+const char* password = WIFI_PASSWORD;
 
 // MQTT Broker settings (Your Ubuntu Gateway)
-const char* mqtt_server = "X.X.X.X";
+const char* mqtt_server = MQTT_HOST;
 const int mqtt_port = 1883; 
 const char* mqtt_topic = "solarshield/telemetry/inverter1";
 const char* command_topic = "solarshield/commands"; // Naya topic commands ke liye
 
-const char* mqtt_user = "esp32_client"; 
-const char* mqtt_password = "solarshield"; 
+const char* mqtt_user = MQTT_USERNAME; 
+const char* mqtt_password = MQTT_PASSWORD; 
 
 WiFiClient espClient; 
 PubSubClient client(espClient);
@@ -188,7 +189,7 @@ void publishTelemetry() {
   doc["inverter_temperature"] = serialized(String(inverter_temperature, 2)); 
   doc["irradiance"] = serialized(String(irradiance, 1)); 
 
-  char jsonBuffer[256];
+  char jsonBuffer[512];
   serializeJson(doc, jsonBuffer);
 
   if (client.publish(mqtt_topic, jsonBuffer)) {
@@ -207,6 +208,7 @@ void setup() {
   randomSeed(analogRead(0)); 
   
   setup_wifi();
+  client.setBufferSize(768);
   client.setServer(mqtt_server, mqtt_port);
   client.setCallback(mqttCallback); // Set up MQTT command listener
 }
@@ -237,3 +239,4 @@ void loop() {
     }
   }
 }
+
