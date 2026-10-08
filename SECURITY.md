@@ -12,3 +12,16 @@ Required owner actions:
 Use .env and Firmware/secrets.h locally; both are ignored. Never paste replacement credentials into issues or documentation. The provided firmware/broker configuration is for isolated plaintext labs. Do not describe this setup as encrypted transport.
 
 Reference: https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository
+
+## Isolated service validation
+
+The repository's `tests/validate_stack.py` creates fresh, temporary test credentials
+and verifies password replacement, InfluxDB token revocation, MQTT TLS and a Grafana
+read-only token. Results are recorded in `docs/stack-validation-results.json`.
+These checks do not revoke credentials previously exposed from the owner's services.
+No old owner token or password is used by the test. Temporary credentials, keys and
+service state are removed when the harness exits; they are never committed.
+
+The broker template now binds to loopback by default. The real-service test creates
+a separate loopback TLS listener. Any ESP32 or LAN deployment needs its own supported
+network address, authentication, topic ACLs and transport configuration.

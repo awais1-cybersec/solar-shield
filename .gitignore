@@ -9,3 +9,6 @@ Firmware/secrets.h
 *.joblib
 local-telemetry.jsonl
 local-evaluation.json
+
+.test-services/
+local-stack-results.json

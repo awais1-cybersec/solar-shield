@@ -1,0 +1,59 @@
+{
+  "validated_at_utc": "2026-10-08T06:57:15.306409+00:00",
+  "scope": "Isolated real local services; synthetic publisher, original model/scaler; no physical inverter or owner cloud account.",
+  "python": "3.12.14",
+  "dependencies": {
+    "tensorflow-cpu": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.3.5",
+    "scikit-learn": "1.8.0",
+    "paho-mqtt": "2.1.0",
+    "influxdb-client": "1.50.0"
+  },
+  "services": {
+    "mosquitto": "mosquitto version 2.0.18",
+    "influxdb": "v2.9.1",
+    "grafana": "13.1.7"
+  },
+  "mqtt_tls_verified": true,
+  "anonymous_mqtt_rejected": true,
+  "rotated_old_mqtt_password_rejected": true,
+  "revoked_test_influx_token_rejected": true,
+  "grafana_read_token_write_rejected": true,
+  "real_service_credentials_rotated": "Only newly created isolated test credentials; owner credentials not accessed or revoked.",
+  "records_published": 80,
+  "invalid_json_published": 1,
+  "stored_windows": 61,
+  "expected_windows_calculation": "80 - 20 + 1 = 61",
+  "threshold": 0.12,
+  "threshold_status": "Historical uncalibrated value used for a plumbing test",
+  "normal_flags": 22,
+  "anomaly_flags": 39,
+  "mse_min": 0.011510772695497036,
+  "mse_max": 1.141336220842251,
+  "publish_to_all_records_stored_seconds": 12.356110409000053,
+  "timing_scope": "Entire 80-record burst including MQTT delivery, inference and DB writes; not per-record latency or hardware benchmark.",
+  "grafana_data_source_health": "OK",
+  "grafana_dashboard_panels": [
+    {
+      "title": "Reconstruction Error and Active Threshold",
+      "frames": 2,
+      "rows": 24
+    },
+    {
+      "title": "Anomaly Triage Status",
+      "frames": 1,
+      "rows": 1
+    },
+    {
+      "title": "Grid Context Telemetry",
+      "frames": 3,
+      "rows": 36
+    }
+  ],
+  "browser_render_checked": false,
+  "artifact_sha256": {
+    "scaler.pkl": "f820427e4c26d586740806210e8ca9cf29555aee31bc0db7dd38816e11f02b9b",
+    "solar_shield.keras": "a16498b4a95b9cf1cd80e4290ee440e5c2aacc647f22db6e8610e6e239b53769"
+  }
+}

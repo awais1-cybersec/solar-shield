@@ -1,0 +1,48 @@
+name: Real service integration
+on:
+  push:
+    paths:
+      - 'Ai-engine/**'
+      - 'Dashboards/**'
+      - 'tests/**'
+      - '.github/workflows/integration.yml'
+  pull_request:
+    paths:
+      - 'Ai-engine/**'
+      - 'Dashboards/**'
+      - 'tests/**'
+      - '.github/workflows/integration.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: tests/requirements-validation.txt
+      - name: Install runtime and build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential libssl-dev
+          pip install -r tests/requirements-validation.txt
+      - name: Install pinned test services
+        run: bash tests/install_services.sh
+      - name: Run real service pipeline and credential checks
+        run: |
+          python tests/validate_stack.py \
+            --mosquitto .test-services/mosquitto-2.0.18/src/mosquitto \
+            --mosquitto-passwd .test-services/mosquitto-2.0.18/apps/mosquitto_passwd/mosquitto_passwd \
+            --influxd .test-services/influxdb2-2.9.1/influxd \
+            --grafana-home .test-services/oss/grafana-13.1.7 \
+            --output local-stack-results.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: stack-validation-results
+          path: local-stack-results.json
+          if-no-files-found: error

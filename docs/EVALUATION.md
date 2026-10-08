@@ -26,7 +26,7 @@ The owner supplied the original scaler. No replacement scaler or benchmark figur
 
 ## Streaming limitations
 
-The live buffer assumes one ordered stream with a consistent sampling interval. It does not currently reject duplicate or out-of-order timestamps or clear the buffer on gaps. It runs model and synchronous database work in the MQTT callback. Queueing, backpressure, timestamp validation and end-to-end latency testing remain deployment work.
+The live buffer assumes one ordered stream with a consistent sampling interval. It does not currently reject duplicate or out-of-order timestamps or clear the buffer on gaps. It runs model and synchronous database work in the MQTT callback. Queueing, backpressure, timestamp validation, outage recovery and per-record latency testing remain deployment work. A synthetic burst through real local services is recorded below.
 
 ## Executed synthetic integration check
 
@@ -47,4 +47,23 @@ pip install -r tests/requirements-validation.txt
 python tests/validate_model.py --output local-evaluation.json
 ```
 
-This script loads the repository's trusted serialized model/scaler and requires no service credentials. The six lightweight contract tests remain runnable without ML dependencies. Live service delivery, credential revocation, threshold calibration and held-out evaluation remain pending.
+This script loads the repository's trusted serialized model/scaler and requires no service credentials. The six lightweight contract tests remain runnable without ML dependencies. This earlier check captured database writes locally. The subsequent real-service check below verifies delivery and test credential revocation in a new isolated environment. Owner-account credential revocation, threshold calibration and held-out evaluation remain pending.
+
+## Executed real-service integration check
+
+See [stack-validation-results.json](stack-validation-results.json) for measured evidence
+and [LOCAL_STACK.md](LOCAL_STACK.md) for the executable procedure. Mosquitto, InfluxDB
+and Grafana were newly created local services; no service transport or database write
+was mocked. The original model/scaler artifacts were used without fitting preprocessing.
+
+- 80 valid samples and one malformed JSON message traveled through real MQTT TLS.
+- 61 windows were stored in InfluxDB with finite MSE, matching anomaly flags and the running threshold.
+- Grafana data-source health returned OK; all three imported dashboard panel queries returned data.
+- Generated MQTT credentials were replaced and the old password rejected. A generated InfluxDB token was revoked and rejected. Grafana's separate read-only token was denied a write.
+- This validates the isolated setup, not the owner's laptop or cloud deployment. No exposed owner credential was used or revoked.
+- The recorded burst took about 12.36 seconds from publication until all records were visible in the database. This is not per-record latency, throughput or real-inverter performance.
+- Backend panel queries were exercised; browser rendering was not exercised in the recorded run.
+
+The synthetic dataset, overlapping windows and historical threshold cannot establish
+real-world detection quality. Training data, feature-order provenance, split evidence
+and threshold calibration are still needed for held-out evaluation.

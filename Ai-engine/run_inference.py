@@ -15,9 +15,9 @@ import joblib  # Scaler load karne ke liye zaroori hai
 import os
 from influxdb_client.client.influxdb_client import InfluxDBClient
 from influxdb_client.client.write.point import Point
-from influxdb_client.client.write_api import ASYNCHRONOUS, SYNCHRONOUS
+from influxdb_client.client.write_api import SYNCHRONOUS
 
-# Configure production-grade logging for the SOC console
+# Configure console logging for the research prototype
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - [R-TADS] - %(levelname)s - %(message)s'
@@ -26,7 +26,7 @@ logging.basicConfig(
 class SolarShieldRTADS:
     """
     Real-Time Anomaly Detection System for Solar Shield.
-    Fully synchronized with LSTM Autoencoder (8 features, window=20).
+    Runtime contract: 8 features and 20 records per reconstruction window.
     """
     def __init__(self, args):
         # 1. System Configuration
@@ -86,7 +86,7 @@ class SolarShieldRTADS:
     def on_connect(self, client, userdata, flags, rc, properties=None):
         if rc == 0:
             logging.info(f"Connected to Mosquitto broker at {self.broker}")
-            self.client.subscribe(self.topic)
+            self.client.subscribe(self.topic, qos=1)
             logging.info(f"Actively monitoring telemetry on topic: {self.topic}")
         else:
             logging.error(f"Broker connection failed with return code {rc}")
@@ -120,8 +120,10 @@ class SolarShieldRTADS:
         reconstructed = self.model.predict(input_tensor, verbose=0)
 
         # --- Reconstruction Error (MSE) Calculation ---
+        if reconstructed.shape != input_tensor.shape or not np.isfinite(reconstructed).all():
+            raise ValueError("Invalid model reconstruction shape or non-finite values")
         mse = float(np.mean(np.square(input_tensor - reconstructed)))
-        if reconstructed.shape != input_tensor.shape or not np.isfinite(mse):
+        if not np.isfinite(mse):
             raise ValueError("Invalid model reconstruction shape or non-finite error")
         is_anomaly = bool(mse > self.threshold)
 
@@ -143,6 +145,7 @@ class SolarShieldRTADS:
                 .field("inverter_temperature", float(payload.get("inverter_temperature", 0.0)))
                 .field("irradiance", float(payload.get("irradiance", 0.0)))
                 .field("mse", mse)
+                .field("threshold", float(self.threshold))
                 .field("is_anomaly", is_anomaly)
             )
             self.write_api.write(bucket=self.influx_bucket, org=self.influx_org, record=point)
