@@ -2,7 +2,7 @@
 
 A capstone research prototype for detecting deviations in simulated solar-inverter telemetry using an LSTM autoencoder, MQTT, InfluxDB, and Grafana. An anomaly indicates a deviation for investigation, not proof of a cyberattack.
 
-**Status:** source, model, and the owner-supplied original scaler are available. Model/scaler compatibility and end-to-end inference have not yet been verified in this maintenance review. Training/evaluation data and calibration evidence are not included, so no accuracy, replay-detection guarantee, or latency benchmark is claimed.
+**Status:** source, model, and the owner-supplied original scaler are available. The real model and scaler passed a local synthetic integration check: 80 samples produced 61 finite reconstruction windows and 61 captured database records. See [the validation report](docs/validation-results.json). Training feature order and the live MQTT → InfluxDB → Grafana deployment remain unverified. Training/evaluation data and calibration evidence are not included, so no accuracy, replay-detection guarantee, or latency benchmark is claimed.
 
 ## Architecture
 

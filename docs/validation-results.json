@@ -1,0 +1,44 @@
+{
+  "validated_at_utc": "2026-10-08T03:15:07.444241+00:00",
+  "dependencies": {
+    "numpy": "2.3.5",
+    "scikit-learn": "1.8.0",
+    "joblib": "1.5.3",
+    "paho-mqtt": "2.1.0",
+    "influxdb-client": "1.50.0"
+  },
+  "scope": "Synthetic smoke test; not held-out real-world accuracy. MQTT network and real InfluxDB/Grafana not exercised.",
+  "python": "3.12.14",
+  "tensorflow": "2.21.0",
+  "keras": "3.15.1",
+  "model_input_shape": [
+    null,
+    20,
+    8
+  ],
+  "scaler_features": 8,
+  "feature_names_recorded": false,
+  "records": 80,
+  "windows": 61,
+  "database_points_captured": 61,
+  "threshold": 0.12,
+  "threshold_status": "Historical code value, not calibrated in this test",
+  "mse_min": 0.011510772695497036,
+  "mse_max": 1.141336220842251,
+  "synthetic_metrics": {
+    "tp": 39,
+    "fp": 0,
+    "tn": 21,
+    "fn": 1,
+    "precision": 1.0,
+    "recall": 0.975,
+    "false_positive_rate": 0.0
+  },
+  "warm_inference_mean_ms": 112.87871970491928,
+  "warm_inference_p95_ms": 265.0126639999826,
+  "latency_scope": "Model.predict only, after first integration pass; current container CPU, not user hardware",
+  "sha256": {
+    "solar_shield.keras": "a16498b4a95b9cf1cd80e4290ee440e5c2aacc647f22db6e8610e6e239b53769",
+    "scaler.pkl": "f820427e4c26d586740806210e8ca9cf29555aee31bc0db7dd38816e11f02b9b"
+  }
+}
